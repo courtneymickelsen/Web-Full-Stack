@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+    <!-- <h3 class="panel-title col-xs-6 my-0">Contacts</h3> -->
+    <div class="panel-heading clearfix">
+        <h3>{{ contact.name }}</h3>
+        <div class="row">
+            <div class="col-xs-12">
+                <img src="{{ contact.imageUrl }}" alt="" class="img-responsive">
+                <div class="pull-right">
+                    <a class="btn btn-primary" href="#">Edit</a>
+                    <a class="btn btn-danger" href="#">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <strong>Email: </strong>{{ contact.email }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <strong>Phone: </strong>{{ contact.phone }}
+            </div>
+        </div>
+    </div>
+</div>
