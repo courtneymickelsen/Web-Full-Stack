@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+      <h3 class="col-xs-6">Contacts</h3>
+      <a href="#" class="btn btn-success pull-right my-3">New Contact</a>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <cms-contact-item 
+        *ngFor="let contactObj of contacts"
+        [contact]="contactObj"
+        (contactSelected)="onContactSelected(contactObj)"
+        ></cms-contact-item>
+      </div>
+    </div>
+  </div>
+</div>
