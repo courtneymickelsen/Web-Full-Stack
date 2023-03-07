@@ -21,7 +21,7 @@ export class MessageEditComponent implements AfterViewInit {
   }
 
   @Output() addMessageEvent = new EventEmitter<Message>()
-  
+
   onSendMessage(event: Event){
     event.preventDefault();
     let messageObj = new Message('017', this.subject, this.msgText, this.currentSender)
