@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Message } from '../message.model'
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-edit',
@@ -7,25 +8,23 @@ import { Message } from '../message.model'
   styleUrls: ['./message-edit.component.css']
 })
 
-export class MessageEditComponent implements AfterViewInit {
+export class MessageEditComponent {
   subject: string = ''
   msgText: string = ''
-  currentSender: string = 'Courtney Mickelsen'
+  currentSender: string = '17'
 
   @ViewChild('subject') subjectInputRef: ElementRef
   @ViewChild('msgText') msgTextInputRef: ElementRef
-  
-  ngAfterViewInit() {
-    this.subject = this.subjectInputRef.nativeElement.value
-    this.msgText = this.msgTextInputRef.nativeElement.value
-  }
-
   @Output() addMessageEvent = new EventEmitter<Message>()
-
+  
+  constructor(private messageService: MessageService){}
+  
   onSendMessage(event: Event){
     event.preventDefault();
-    let messageObj = new Message('017', this.subject, this.msgText, this.currentSender)
-    this.addMessageEvent.emit(messageObj)
+    this.subject = this.subjectInputRef.nativeElement.value
+    this.msgText = this.msgTextInputRef.nativeElement.value
+    let messageObj = new Message('7', this.subject, this.msgText, this.currentSender)
+    this.messageService.addMessage(messageObj)
     this.onClear()
   }
 

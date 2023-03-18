@@ -7,9 +7,9 @@
     <div class="row">
       <div class="col-xs-12">
         <cms-contact-item 
-        *ngFor="let contactObj of contacts"
-        [contact]="contactObj"
-        (contactSelected)="onContactSelected(contactObj)"
+        *ngFor="let c of contacts"
+        [contact]="c"
+        (contactSelected)="onContactSelected(c)"
         ></cms-contact-item>
       </div>
     </div>
