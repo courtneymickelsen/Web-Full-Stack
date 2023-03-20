@@ -6,7 +6,7 @@ import { HeaderComponent } from './header.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
-import { ContactEditComponent } from './contacts/contact-list/contact-edit/contact-edit.component';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactItemComponent } from './contacts/contact-item/contact-item.component';
 import { DocumentsComponent } from './documents/documents.component';
 import { DocumentListComponent } from './documents/document-list/document-list.component';
@@ -16,6 +16,9 @@ import { MessageItemComponent } from './messages/message-item/message-item.compo
 import { MessageEditComponent } from './messages/message-edit/message-edit.component';
 import { MessageListComponent } from './messages/message-list/message-list.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './app-routing.module';
+import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,12 @@ import { DropdownDirective } from './shared/dropdown.directive';
     MessageItemComponent,
     MessageEditComponent,
     MessageListComponent,
-    DropdownDirective
+    DropdownDirective,
+    DocumentEditComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]

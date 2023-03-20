@@ -10,18 +10,25 @@ export class DocumentService {
     this.documents = MOCKDOCUMENTS;
   }
   documentSelectedEvent = new EventEmitter<Document>()
+  documentChangedEvent = new EventEmitter<Document[]>()
 
   getDocuments(): Document[]{
     return this.documents.slice();
   }
 
-  getDocument(id: string): Document {
-    let document: any = this.documents.forEach((d) => {
-      if (d.id === id){
-        return d
-      }
-      return null
-    })
-    return document
+  getDocument(id: number): Document {
+    return this.documents[id]
   }
+
+  deleteDocument(document: Document) {
+    if (!document) {
+      return;
+    }
+    const pos = this.documents.indexOf(document);
+    if (pos < 0) {
+      return;
+    }
+    this.documents.splice(pos, 1);
+    this.documentChangedEvent.emit(this.documents.slice());
+ }
 }
