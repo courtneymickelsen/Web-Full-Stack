@@ -19,6 +19,8 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app-routing.module';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { FormsModule } from '@angular/forms';
+import { DndModule } from 'ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    FormsModule,
+    DndModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
