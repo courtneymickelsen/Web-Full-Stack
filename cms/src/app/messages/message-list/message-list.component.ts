@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from '../message.model'
 import { MessageService } from '../message.service';
+import { ContactService } from 'src/app/contacts/contact.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'cms-message-list',
@@ -10,6 +12,7 @@ import { MessageService } from '../message.service';
 
 export class MessageListComponent implements OnInit {
   messages: Message[] = []
+  subscription = new Subscription;
 
   constructor(private messageService: MessageService){}
 
@@ -19,7 +22,12 @@ export class MessageListComponent implements OnInit {
       (messages: Message[]) => {
         this.messages = messages
       }
-    );
+    )
+    this.subscription = this.messageService.messageListChangedEvent.subscribe(
+      (messagesList: Message[]) => {
+        this.messages = messagesList
+      }
+    )
   }
   
   onMessageSelected(message: Message){
