@@ -4,6 +4,7 @@ export class Document {
     public description: string;
     public url: string;
     public children: any;
+  _id: any;
     
     constructor(id: string, name: string, description: string, url: string, children: any){
         this.id = id;

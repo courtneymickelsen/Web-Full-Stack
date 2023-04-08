@@ -18,7 +18,7 @@ export class MessageService {
   @Output() messageListChangedEvent = new Subject<Message[]>()
 
   getMessages(): Message[]{
-    this.HttpClient.get<Message[]>('https://cms-database-17-default-rtdb.firebaseio.com/messages.json')
+    this.HttpClient.get<Message[]>('http://localhost:3000/messages')
     .subscribe((messages: Message[]) => {
       this.messages = messages
       this.maxMessageId = this.getMaxId()
@@ -40,15 +40,33 @@ export class MessageService {
     return message
   }
 
-  addMessage(message: Message){
-    this.messages.push(message)
-    this.storeMessages()
+  addMessage(message: Message) {
+    if (!message) {
+      return;
+    }
+
+    // make sure id of the new Message is empty
+    message.id = '';
+
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+    // add to database
+    this.HttpClient.post<{ message: string, messageEntry: Message }>('http://localhost:3000/messages',
+      message,
+      { headers: headers })
+      .subscribe(
+        (responseData) => {
+          // add new message to messages
+          this.messages.push(responseData.messageEntry);
+          this.storeMessages();
+        }
+      );
   }
 
   storeMessages() {
     let messagesListString = JSON.stringify(this.messages)
     const headers = new HttpHeaders({'Content-Type': 'application/json'})
-    this.HttpClient.put('https://cms-database-17-default-rtdb.firebaseio.com/messages.json', messagesListString, {headers: headers})
+    this.HttpClient.put('http://localhost:3000/messages', messagesListString, {headers: headers})
     .subscribe(() => {
       this.messageListChangedEvent.next(this.messages.slice())
     })
